@@ -1,19 +1,36 @@
 from test_framework import generic_test
 from test_framework.test_failure import TestFailure
 
+from collections import deque
+
 
 class QueueWithMax:
+    def __init__(self):
+        self.queue = deque()
+        self.maxQueue = deque()
+
     def enqueue(self, x):
         # TODO - you fill in here.
+
+        self.queue.append(x)
+        self.maxQueue.append(x)
+
+        for i in range(len(self.maxQueue)-2, -1, -1):
+            if x > self.maxQueue[i]:
+                self.maxQueue[i] = x
+            else:
+                break
         return
 
     def dequeue(self):
         # TODO - you fill in here.
-        return 0
+        self.maxQueue.popleft()
+
+        return self.queue.popleft()
 
     def max(self):
         # TODO - you fill in here.
-        return 0
+        return self.maxQueue[0]
 
 
 def queue_tester(ops):

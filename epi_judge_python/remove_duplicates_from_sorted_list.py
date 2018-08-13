@@ -3,7 +3,23 @@ from test_framework import generic_test
 
 def remove_duplicates(L):
     # TODO - you fill in here.
-    return None
+
+    print("List:: ",type(L))
+
+    if not L:
+        return 0
+
+    read, write = 1,1
+    num = L[0]
+    while read < len(L):
+        if L[read] != num:
+            L[write] = L[read]
+            num = L[write]
+            write = write +1
+
+        read += 1
+
+    return write
 
 
 if __name__ == '__main__':

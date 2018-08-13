@@ -3,6 +3,7 @@ from test_framework import generic_test
 
 def online_median(sequence):
     # TODO - you fill in here.
+    print(type(sequence))
     return []
 
 

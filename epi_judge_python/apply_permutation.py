@@ -3,8 +3,11 @@ from test_framework import generic_test
 
 def apply_permutation(perm, A):
     # TODO - you fill in here.
-    return
 
+    for i,p in enumerate(perm):
+        A[p], A[i] = A[i], A[p]
+
+    return
 
 def apply_permutation_wrapper(perm, A):
     apply_permutation(perm, A)
