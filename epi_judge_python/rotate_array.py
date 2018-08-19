@@ -6,6 +6,18 @@ from test_framework.test_utils import enable_executor_hook
 
 def rotate_array(rotate_amount, A):
     # TODO - you fill in here.
+    def reverse(i,j):
+        start, end = i,j
+        while start < end and end < n:
+            A[start],A[end] = A[end], A[start]
+            start, end = start+1, end-1
+    n = len(A)
+
+    rotate_amount = rotate_amount % n
+    reverse(0, n-rotate_amount-1)
+    reverse(n-rotate_amount, n-1)
+    reverse(0,n-1)
+
     return
 
 

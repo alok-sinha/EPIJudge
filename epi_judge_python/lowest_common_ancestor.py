@@ -8,7 +8,37 @@ from test_framework.test_utils import enable_executor_hook
 
 def lca(tree, node0, node1):
     # TODO - you fill in here.
-    return None
+    if node0 == node1:
+        return node0
+
+
+    def inorder(root, node0, node1, found):
+        oneTrue = found[0] or found[1]
+
+        if root == node0:
+            found[0] = True
+        elif root == node1:
+            found[1] = True
+
+        if found[0] and found[1]:
+            return None
+
+        if root.left:
+            lcaroot = inorder(root.left, node0, node1, found)
+            if lcaroot:
+                return lcaroot
+
+        if not (found[0] and found[1]) and root.right:
+            lcaroot = inorder(root.right, node0, node1, found)
+            if lcaroot:
+                return lcaroot
+
+        if not oneTrue and found[0] and found[1]:
+            return root
+        else:
+            return None
+
+    return inorder(tree, node0, node1, [False, False])
 
 
 @enable_executor_hook

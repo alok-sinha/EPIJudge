@@ -14,6 +14,18 @@ class BinaryTreeNode:
 
 def construct_right_sibling(tree):
     # TODO - you fill in here.
+
+    def connectGrandChild(left, right):
+        if left.right:
+            left.right.right = right.left
+
+    if tree and tree.left:
+        tree.left.right = tree.right
+        construct_right_sibling(tree.left)
+        construct_right_sibling(tree.right)
+        connectGrandChild(tree.left, tree.right)
+
+
     return
 
 

@@ -8,7 +8,23 @@ from test_framework.test_utils import enable_executor_hook
 
 def lca(node0, node1):
     # TODO - you fill in here.
-    return None
+
+    d = {}
+
+    d[node0] = True
+    while node0 and node0.parent:
+        d[node0.parent] = True
+        node0 = node0.parent
+
+    if node1 in d:
+        return node1
+
+    while node1 and node1.parent:
+        if node1.parent in d:
+            return node1.parent
+        node1 = node1.parent
+
+    return node0
 
 
 @enable_executor_hook

@@ -4,10 +4,32 @@ from test_framework import generic_test
 from test_framework.test_failure import TestFailure
 from test_framework.test_utils import enable_executor_hook
 
-
+from collections import defaultdict
 def decompose_into_dictionary_words(domain, dictionary):
     # TODO - you fill in here.
-    return []
+
+    cache = defaultdict(list)
+
+    for i, c in enumerate(domain):
+
+        if domain[:i+1] in dictionary:
+            cache[i] = [domain[:i + 1]]
+
+        x = []
+        for offset in cache.keys():
+            if domain[offset+1:i+1] in dictionary:
+                x.append(domain[offset+1:i+1])
+                cache[offset].append(domain[offset+1:i+1])
+        if x:
+            cache[i] = x
+
+    print(cache)
+    if len(domain)-1 in cache:
+        print("yes", cache[len(domain)-1])
+        return cache[0]
+    else:
+        print("no")
+        return []
 
 
 @enable_executor_hook

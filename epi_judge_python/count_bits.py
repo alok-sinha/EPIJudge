@@ -4,8 +4,13 @@ from test_framework import generic_test
 def count_bits(x):
     # TODO - you fill in here.
 
+    count = 0
 
-    return 0
+    while x:
+        x &= (x-1)
+        count += 1
+
+    return count
 
 
 if __name__ == '__main__':

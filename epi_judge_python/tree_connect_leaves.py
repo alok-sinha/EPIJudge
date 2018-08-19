@@ -7,7 +7,25 @@ from test_framework.test_utils import enable_executor_hook
 
 def create_list_of_leaves(tree):
     # TODO - you fill in here.
-    return []
+
+    def inorder(root, leaves):
+
+        if not root:
+            return
+
+        if not root.left and not root.right:
+            leaves.append(root)
+            return
+
+        inorder(root.left, leaves)
+        inorder(root.right, leaves)
+
+
+    leaves = []
+    inorder(tree, leaves)
+
+
+    return leaves
 
 
 @enable_executor_hook
