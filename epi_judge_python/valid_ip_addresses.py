@@ -3,6 +3,8 @@ from test_framework import generic_test
 
 def get_valid_ip_address(s):
     # TODO - you fill in here.
+    print(s)
+
     return []
 
 

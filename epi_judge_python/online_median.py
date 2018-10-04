@@ -1,49 +1,34 @@
 from test_framework import generic_test
 
-import heapq
+from heapq import *
 def online_median(sequence):
     # TODO - you fill in here.
     print(type(sequence))
 
-    n = len(list(sequence))
-    if n == 0:
-        return []
-    elif n == 1:
-        return sequence
-    elif n == 2:
-        return [(sequence[0]+ sequence[1])/2]
-
-    left, right = sequence[0], sequence[1] if sequence[0] < sequence[1] else sequence[1], sequence[0]
+    left, right = [],[]
     median = []
 
+    for num in sequence:
 
-    for i in range(2,n):
-        num = sequence[i]
-        nLeft, nRight = len(left), len(right)
-        if not nLeft:
-            left[0] = -num
-            continue
+        heappush(right, -heappushpop(left, -num))
+        if len(left) < len(right):
+            heappush(left, -heappop(right))
 
-        if num <= -left[0]:#Belongs to  left heap
-            if nLeft == nRight:
-                heapq.heappush(left, -num)
-            else:
-                x = heapq.heappushpop(left, -num)
-                heapq.heappush(-x)
-        else: #Should go to right
-            if nLeft == nRight:
-                x = heapq.heappushpop(right,num)
-                heapq.heappush(left,-x)
-            else:
-                heapq.heappush(right, num)
-
-        if len(left)  == len(right):
+        if len(left) == len(right):
             median.append((-left[0] + right[0])/2)
         else:
             median.append(-left[0])
 
-
     return median
+
+
+
+
+
+
+
+
+    return 0
 
 
 def online_median_wrapper(sequence):

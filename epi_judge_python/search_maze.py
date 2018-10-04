@@ -9,49 +9,48 @@ from test_framework.test_utils import enable_executor_hook
 WHITE, BLACK = range(2)
 
 Coordinate = collections.namedtuple('Coordinate', ('x', 'y'))
+from collections import deque
 
 
 def search_maze(maze, s, e):
     # TODO - you fill in here.
 
     def createPath():
-        path = [ex]
-        child = ex
-        print("Parent:", parent)
+        path = [e]
+        child = e
         while parent[child]:
             path.insert(0, Coordinate(parent[child][0], parent[child][1]))
             child = parent[child]
 
-        print("Path = ", path)
         return path
 
     def getEdges(node):
         x,y = node
-        d = [(x + i, y) for i in [-1, 1] if x+i < l and x+i >= 0 and not maze[x + i][y]]
-        d.extend((x, y + i) for i in [-1, 1] if y+i < b and y+i >= 0 and not maze[x][y + i])
+        d = [Coordinate(x + i, y) for i in [-1, 1] if x+i < l and x+i >= 0 and not maze[x + i][y]]
+        d.extend(Coordinate(x, y + i) for i in [-1, 1] if y+i < b and y+i >= 0 and not maze[x][y + i])
 
-        print("edges ", d)
         return d
 
-    print(s, e, maze)
     g = {}
-    stack = [(s[0], s[1])]
-    g[(s[0], s[1])] = "Discovered"
+    g[s] = "Discovered"
+
     l, b = len(maze), len(maze[0])
-    ex = (e[0], e[1])
     parent = {(s[0], s[1]):None}
 
-    while stack:
-        node = stack.pop()
-        print("Node", g)
+    q = deque([(s[0],s[1])])
+    q.append(s)
+
+
+    while q:
+        node = q.popleft()
         for edge in getEdges(node):
 
-            if edge == ex:
-                parent[ex] = node
+            if edge == e:
+                parent[e] = node
                 return createPath()
 
             if edge not in g:
-                stack.append(edge)
+                q.append(edge)
                 parent[edge] = node
                 g[edge] = "Discovered"
         g[node] = "Processed"

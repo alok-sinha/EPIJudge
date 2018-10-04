@@ -3,7 +3,11 @@ from test_framework import generic_test
 
 def swap_bits(x, i, j):
     # TODO - you fill in here.
-    return 0
+    y = x
+    if (x >> i & 0x1) ^ ( x >> j & 0x1):
+        y = x ^ (1 << i | 1 << j)
+
+    return y
 
 
 if __name__ == '__main__':

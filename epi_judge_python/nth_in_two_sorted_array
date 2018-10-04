@@ -1,0 +1,46 @@
+
+
+
+
+def nthInTwoSorted(a1, a2, n):
+
+    def bSearch(item, a):
+        left, right = 0, len(a)-1
+
+        while left <= right:
+            mid = (left + right)//2
+            if a[mid] == item:
+                return mid
+            elif a[mid] > item:
+                right = mid-1
+            else:
+                left = mid + 1
+
+        return left
+
+
+    if n == 1:
+        return min(a1[0], a2[0])
+
+    i1 = bSearch(a1[0], a2)
+    i2 = bSearch(a2[0], a1)
+
+
+    if i1 > i2:
+        i = i1
+        a = a1[i+1:]
+        b = a2
+    else:
+        i = i2
+        a = a2[i+1:]
+        b = a1
+
+    if i >= n:
+        return a[i]
+
+    return nthInTwoSorted(a, b, n-i)
+
+
+
+nthInTwoSorted([1,4,5,7,10,23], [2,3,6,10,12,17], 5)
+

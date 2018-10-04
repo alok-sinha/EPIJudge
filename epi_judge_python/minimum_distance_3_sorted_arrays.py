@@ -3,6 +3,8 @@ from test_framework import generic_test
 
 def find_closest_elements_in_sorted_arrays(sorted_arrays):
     # TODO - you fill in here.
+    numOfArrays = len(sorted_arrays)
+
     return 0
 
 

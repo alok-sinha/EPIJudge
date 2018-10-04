@@ -4,14 +4,31 @@ from doubly_list_node import DoublyListNode
 from test_framework import generic_test
 from test_framework.test_failure import TestFailure
 from test_framework.test_utils import enable_executor_hook
+import bst_node
 
 
 # Returns the root of the corresponding BST. The prev and next fields of the
 # list nodes are used as the BST nodes left and right fields, respectively.
 # The length of the list is given.
 def build_bst_from_sorted_doubly_list(l, n):
-    # TODO - you fill in here.
-    return None
+
+    print(n, l)
+
+    def getMid(head, tail):
+        while head is not tail or head.next is not tail:
+            head, tail = head.next, tail.prev
+
+        return head
+
+    if not l:
+        return None
+
+    mid = getMid(l, n)
+    root = bst_node.BstNode(mid.value)
+    root.left = build_bst_from_sorted_doubly_list(l, mid.prev)
+    root.right = build_bst_from_sorted_doubly_list(mid.next, n)
+
+    return root
 
 
 def compare_vector_and_tree(tree, it):

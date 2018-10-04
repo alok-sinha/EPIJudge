@@ -3,6 +3,23 @@ from test_framework import generic_test, test_utils
 
 def k_largest_in_binary_heap(A, k):
     # TODO - you fill in here.
+
+    l = [A[0]]
+
+    def findNext(l, left, right):
+        if len(l) == k:
+            return
+
+        if A[left] > A[right]:
+            l.append(A[left])
+
+        else:
+            l.append(A[right])
+
+
+    findNext(l, 1,2)
+
+
     return []
 
 

@@ -3,6 +3,21 @@ from test_framework import generic_test
 
 def binary_search_unknown_length(A, k):
     # TODO - you fill in here.
+
+    l= 1
+
+    while True:
+        try:
+            if A[l] == k:
+                return l
+            l *= 2
+        except IndexError:
+            break
+
+    left, right = 0, l
+
+
+
     return 0
 
 

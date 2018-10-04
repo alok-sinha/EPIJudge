@@ -3,11 +3,25 @@ from test_framework import generic_test
 
 def apply_permutation(perm, A):
     # TODO - you fill in here.
+    # Alok
 
-    for i,p in enumerate(perm):
-        A[p], A[i] = A[i], A[p]
 
-    return
+    #0,1,2,3,4
+    #3,1,2,4,0
+
+    #
+    i = 0
+    count = n = len(A)
+    tmp = A[0]
+    while count:
+        while perm[i] == -1:
+            i = (i + 1) % n
+
+        dest = perm[i]
+        perm[i] = -1
+        A[dest],tmp = tmp, A[dest]
+        count -= 1
+    return A
 
 def apply_permutation_wrapper(perm, A):
     apply_permutation(perm, A)

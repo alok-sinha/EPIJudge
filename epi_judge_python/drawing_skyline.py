@@ -9,7 +9,23 @@ Rectangle = collections.namedtuple('Rectangle', ('left', 'right', 'height'))
 
 def compute_skyline(buildings):
     # TODO - you fill in here.
-    return []
+    d = collections.defaultdict(int)
+
+    minX, maxX = 0, 0
+    for b in buildings:
+        for i in range(b.left, b.right + 1):
+            d[i] = max(d[i-1], b.height)
+
+    skyline = [Rectangle(minX, minX, d[minX])]
+    prev = minX
+    print(d)
+    for i in range(minX+1, maxX):
+        if d[i] != d[i - 1]:
+            skyline.append(Rectangle(i, prev, d[i]))
+            prev += 1
+
+    skyline.append(Rectangle(d[maxX], d[maxX], d[maxX]))
+    return skyline
 
 
 @enable_executor_hook

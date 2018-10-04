@@ -3,6 +3,7 @@ from test_framework import generic_test, test_utils
 
 def find_k_largest_in_bst(tree, k):
     # TODO - you fill in here.
+    print(type(tree))
     return None
 
 

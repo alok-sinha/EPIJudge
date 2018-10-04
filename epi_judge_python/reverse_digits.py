@@ -3,7 +3,16 @@ from test_framework import generic_test
 
 def reverse(x):
     # TODO - you fill in here.
-    return 0
+    #Alok
+
+    rev = 0
+    xa = abs(x)
+    while xa:
+        digit = xa%10
+        xa = xa //10
+        rev = rev *10 + digit
+
+    return rev if x > 0 else -rev
 
 
 if __name__ == '__main__':

@@ -1,5 +1,8 @@
 import functools
 
+
+from collections import deque
+
 from test_framework import generic_test
 from test_framework.test_utils import enable_executor_hook
 
@@ -8,11 +11,44 @@ class TrafficElement:
     def __init__(self, time, volume):
         self.time = time
         self.volume = volume
+    def __eq__ (self, o2):
+        return self.volume == o2.volume
+    def __gt__ (self, o2):
+        return self.volume > o2.volume
+    def __lt__ (self, o2):
+        return self.volume < o2.volume
 
 
 def calculate_traffic_volumes(A, w):
     # TODO - you fill in here.
-    return []
+
+    q = deque()
+    qMax = deque()
+
+    A.sort(key=lambda x : x.time)
+
+
+    result = []
+
+    count = 0
+    for te in A:
+        q.append(te)
+        count += 1
+        if qMax:
+            if te.volume > qMax[-1].volume:
+                qMax.append(te)
+            else:
+                qMax.append(qMax[-1])
+        else:
+            qMax.append(te)
+
+        result.append(TrafficElement(te.time, qMax[-1].volume))
+
+        if count == w:
+            q.popleft()
+            qMax.popleft()
+
+    return result
 
 
 @enable_executor_hook
